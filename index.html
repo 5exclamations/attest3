@@ -5,6 +5,98 @@
     <title>Document</title>
 </head>
 <body>
-    
-</body>
+    <!DOCTYPE html>
+<html lang='en'>
+<head>
+   <meta charset='UTF-8'>
+   <title>Landing</title>
+</head>
+<body>
+   <div class="container">
+       <div class="fields">
+           <label for="name">Имя: </label>
+           <input id="name" type="text" class="name" placeholder="Имя пользователя">
+           <label for="name" style="margin-top:1em;">Текст сообщения: </label>
+           <textarea id="message" cols="30" rows="10" class="message" placeholder="Текст сообщения"></textarea>
+           <button class="btn btn-send">Отправить</button>
+           <button class="btn btn-show">Показать историю</button>
+       </div>
+       <div class="history">
+       </div>
+   </div>
+   </body>
+   <style> 
+   @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    body {
+       width: 100vw;
+       height: 100vh;
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+       font-family: 'Montserrat', sans-serif;
+    }
+     
+    .container {
+       width: 100vw;
+       height: 100vh;
+       display: flex;
+    }
+     
+    .fields {
+       width: 30vw;
+       border-right: 1px solid black;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+    }
+     
+    .history {
+       width: 70vw;
+       padding: 2em;
+       box-sizing: border-box;
+       display: flex;
+       flex-direction: column;
+       justify-content: flex-start;
+       align-items: flex-start;
+       overflow: scroll;
+    }
+     
+    .btn {
+       margin-top: 1em;
+    }
+    </style>
+
+    <script>
+    class Message {
+        constructor(author, text) {
+            this.author = author;
+            this.time = new Date();
+            this.text = text;
+        }
+        toHtml(){
+            return "<p>" + this.time + this.author + ":" + this.text + "</p>";
+        }
+    }
+    class Messenger extends Message{
+        constructor(){
+            super();
+            this.history = [];
+        }
+        show_history(){
+            for (let i=0; i<this.history.length; i++){
+                console.log(this.history[i]);
+            }
+        }
+        send(){
+            let author = document.getElementById('name');
+            let text = document.getElementById('message');
+            this.history[this.history.length+1] = {author: text};
+        }
+    }
+    const User = new Messenger()
+    User.send()
+    User.show_history();
+</script>
+
 </html>
